@@ -8,9 +8,7 @@ This is a module that will help you reduce large amounts of data contained withi
 ## Examples
 
 ## Parameters
-* **accountId** - **INT** - Your New Relic account id. This is a required parameter. If you need help finding your account id see [New Relic's documentation here](https://docs.newrelic.com/docs/accounts-partnerships/accounts/account-setup/account-id).  
-
-* **retroactive** - **BOOL** - This determines whether the module will process data retroactively. More information coming.  
+* **accountId** - **INT** - Your New Relic account id. This is a required parameter. If you need help finding your account id see [New Relic's documentation here](https://docs.newrelic.com/docs/accounts-partnerships/accounts/account-setup/account-id). 
 
 * **cadence** - **INT** - The number of hours you want your reduction events to cover. For example: supplying **6** would process 6 hours of data into reduced events. This means that each new reduced event would contains 6 hours worth of data in each newly created event. This is a required parameter.  
 
