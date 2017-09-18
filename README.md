@@ -34,32 +34,32 @@ This is a module that will help you reduce large amounts of data contained withi
             //
             //The "facet" property is required. 
             //It's the name of the event property that you want to facet.
-            "facet": "name",
+            facet : "name",
             //
             //Want to sub-facet? You can! 
             //Below, if the event.facet.name == "Controller/Car_details/show"
             //then those events will be sub-faceted based on their "car_status" property.
-            "subFacet": 
+            subFacet : 
             [
               {
-              "facetValue" : "Controller/Car_details/show"
-              "subFacetProperty" : "car_status"
+              facetValue : "Controller/Car_details/show"
+              subFacetProperty : "car_status"
               }
             ],
             //
             //You can't use a "subFacet" and a "customFilter" in the same facet object.
             //Look at the facet object below for a "customFilter" usage example.
-            "customFilter": undefined 
+            customFilter : undefined 
           },
           {
             //
             //The "facet" property is required. 
             //It's the name of the event property that you want to facet.
-            "facet": "userAgent",
+            facet : "userAgent",
             //
             //You can't use a "subFacet" and a "customFilter" in the same facet object.
             //Look at the facet object above for a "subFacet" usage example.
-            "subFacet": undefined,
+            subFacet : undefined,
             //
             //The custom filter is a synchronus function. Avoid network calls here.
             //The function passed in here should accept a STRING and return a STRING.
@@ -69,7 +69,7 @@ This is a module that will help you reduce large amounts of data contained withi
             //want this function to map "userAgent" to a reduced value of "Mobile",
             //"Tablet", "Desktop" or "Bot". So, instead of returning a reduced event
             //for each unique "userAgent" they would be mapped only to these 4 values.
-            "customFilter": function(facet){
+            customFilter : function(facet){
                 //do nothing with the facet value because this is a fake function
                 var fakeFilterValues = ["Tablet","Desktop","Bot","Mobile"];
                 //and return a random value because this is a fake function
@@ -87,12 +87,12 @@ This is a module that will help you reduce large amounts of data contained withi
             //
             //The "name" property is required. 
             //It's the name of the event's duration property that you want to retrieve.
-            "name": "duration",
+            name : "duration",
             //
             //Want to percentiles of duration? You got it! 
             //This is a required parameter. Atleast one value must be supplied.
             //The options are as follows:
-            "values": 
+            values : 
             [
               "min","max",5,10,50,90,95
             ],
