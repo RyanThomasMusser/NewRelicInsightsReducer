@@ -1,3 +1,16 @@
+/*
+
+Don't mind this for now...
+
+It's basically just notes and sloppy functions
+that I'm going to abstract and use later on.
+
+My atom IDE broke on my home computer so I'm
+keeping this here for now...
+
+*/
+
+
 var config = {
   accountId: 123456,
   cadence: 6,
