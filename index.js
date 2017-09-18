@@ -1,14 +1,7 @@
-//
-//
-Atom editor is broken on my home computer...
-Saving some basic progress here.
-//
-//
-
 var config = {
   accountId: 123456,
   cadence: 6,
-  retroactive: false,
+  retroactive: 1484173900204,
   queryKey: "MY_QUERY_KEY",
   insertKey: "MY_INSERT_KEY",
   applicationIds: [1, 2, 3, 4],
@@ -47,13 +40,14 @@ var config = {
 //
 //validate the retroactive timestamp
 if (config.hasOwnProperty('retroactive')) {
-  if ( config.retroactive != false && (typeof config.retroactive != 'number' || (new Date().getTime() - (365 * 24 * 60 * 60 * 1000) < new Date(config.retroactive).getTime())) ) {
+    var isOlderThanAYear = parseInt(Date.now()  - (365 * 24 * 60 * 60 * 1000)) > new Date(config.retroactive).getTime();
+  if ( config.retroactive != false && (typeof config.retroactive != 'number' || isOlderThanAYear) ) {
     throw new Error("You've passed in a misformatted or a year plus old retroactive param. This should be a UNIX timestamp within the last year...");
   }
 }else{
 	config.retroactive = false;
 }
-console.log('Retroactive date: ', config.retroactive);
+console.log('Retroactive date: ', new Date(config.retroactive));
 //
 //
 //
