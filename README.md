@@ -69,7 +69,13 @@ This is a module that will help you reduce large amounts of data contained withi
             //want this function to map "userAgent" to a reduced value of "Mobile",
             //"Tablet", "Desktop" or "Bot". So, instead of returning a reduced event
             //for each unique "userAgent" they would be mapped only to these 4 values.
-            "customFilter": function(){} 
+            "customFilter": function(facet){
+                //do nothing with the facet value because this is a fake function
+                var fakeFilterValues = ["Tablet","Desktop","Bot","Mobile"];
+                //and return a random value because this is a fake function
+                return fakeFilterValue[ Math.floor(Math.random() * fakeFilterValues.length) ];
+            },
+            //
           },
         ]
         ```
