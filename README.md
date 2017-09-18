@@ -19,7 +19,7 @@ var newRelicInsightsReducer = require('newRelicInsightsReducer');
 var config = {
    accountId : 123456,
    cadence : 6,
-   retroactive: FALSE,
+   retroactive: false,
    queryKey : "MY_QUERY_KEY",
    insertKey : "MY_INSERT_KEY",
    applicationIds : [1,2,3,4],
@@ -32,7 +32,7 @@ var config = {
             facet : "name",
             subFacets : [
               {
-                facetValue : "Controller/Car_details/show"
+                facetValue : "Controller/Car_details/show",
                 subFacetProperty : "car_status"
               }
             ],
@@ -41,17 +41,16 @@ var config = {
             facet : "userAgent",
             customFilter : function(facet){
                 var fakeFilterValues = ["Tablet","Desktop","Bot","Mobile"];
-                return fakeFilterValue[ Math.floor(Math.random() * fakeFilterValues.length) ];
+                return fakeFilterValues[ Math.floor(Math.random() * fakeFilterValues.length) ];
             },
           }
         ],
         durations : [
-            {
+          {
             name : "duration",
-            values : 
-            [
+            values : [
               "min","max",50,90,95
-            ],
+            ]
           }
         ],
     }
