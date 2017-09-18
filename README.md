@@ -63,9 +63,7 @@ This is a module that will help you reduce large amounts of data contained withi
             //
             //The custom filter is a synchronus function. Avoid network calls here.
             //The function passed in here should accept a STRING and return a STRING.
-            //The parameter passed in is the value of the "userAgent" property
-            //and should return a value that will replace the "userAgent" property.
-            //In this example, I am imitating filtering off of "userAgent" and I would
+            //In this example, I am imitating filtering the "userAgent" and I would
             //want this function to map "userAgent" to a reduced value of "Mobile",
             //"Tablet", "Desktop" or "Bot". So, instead of returning a reduced event
             //for each unique "userAgent" they would be mapped only to these 4 values.
@@ -74,6 +72,8 @@ This is a module that will help you reduce large amounts of data contained withi
                 var fakeFilterValues = ["Tablet","Desktop","Bot","Mobile"];
                 //and return a random value because this is a fake function
                 return fakeFilterValue[ Math.floor(Math.random() * fakeFilterValues.length) ];
+                //the return value will replace the original value of "userAgent"
+                //which is passed in as the facet parameter
             },
             //
           },
