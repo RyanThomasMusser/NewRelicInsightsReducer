@@ -17,44 +17,34 @@ var newRelicInsightsReducer = require('newRelicInsightsReducer');
 
 // Then, define your configuration
 var config = {
-   accountId : 123456,
-   cadence : 6,
-   retroactive: false,
-   queryKey : "MY_QUERY_KEY",
-   insertKey : "MY_INSERT_KEY",
-   applicationIds : [1,2,3,4],
-   events : [
-    {
-        oldEventName : "Transaction",
-        newEventName : "reducedTransaction",
-        facets : [
-          {
-            facet : "name",
-            subFacets : [
-              {
-                facetValue : "Controller/Car_details/show",
-                subFacetProperty : "car_status"
-              }
-            ],
-          },
-          {
-            facet : "userAgent",
-            customFilter : function(facet){
-                var fakeFilterValues = ["Tablet","Desktop","Bot","Mobile"];
-                return fakeFilterValues[ Math.floor(Math.random() * fakeFilterValues.length) ];
-            },
-          }
-        ],
-        durations : [
-          {
-            name : "duration",
-            values : [
-              "min","max",50,90,95
-            ]
-          }
-        ],
-    }
-   ]
+  accountId: 541497,
+  cadence: 6,
+  queryKey: "YOUR_QUERY_KEY",
+  insertKey: "YOUR_INSERT_KEY",
+  events: [{
+    oldEventName: "Transaction",
+    newEventName: "reducedTransaction",
+    facets: [{
+      name: "name",
+      subFacet: {
+        facetValue: "Controller/Car_details/show",
+        facetProperty: "car_status"
+      },
+      },{
+        name: "userAgent",
+        customFilter: function(facet) {
+          var fakeFilterValues = ["Tablet", "Desktop", "Bot", "Mobile"];
+          return fakeFilterValues[Math.floor(Math.random() * fakeFilterValues.length)];
+        },
+      }
+    ],
+    durations: [{
+      name: "duration",
+      values: [
+        "min", "max", 50, 90, 95
+      ]
+    }]
+  }]
 };
 
 //Lastly, invoke the function
@@ -67,13 +57,9 @@ newRelicInsightsReducer(config);
 
 * **cadence** - **INT** - The number of hours you want your reduction events to cover. For example: supplying **6** would process 6 hours of data into reduced events. This means that each new reduced event would contains 6 hours worth of data in each newly created event. This is a required parameter. The minimum is 1 hour and maximum is 24 hours. 
 
-* **retroactive** - **INT** - This is not a required parameter. UNIX timestamp. If managed correctly, you can reduce events, at the cadence you specify, since the UNIX timestamp supplied. It will check to find the latest similarly created event type after the supplied UNIX timestamp, and reduce events in the cadence you specify just after that. For example, if I pass 1504600000 (09/05/2017 @ 8:26am (UTC)) in here, it will check for the latest created custom event with the same name after 09/05/2017 @ 8:26am (UTC) and begin reducing events from there. If no other similarly named custom events exist that were created after 09/05/2017 @ 8:26am (UTC), the process will create them beginning on 09/05/2017 @ 8:26am (UTC). It will only create 1 record of custom events. Should you want to populate Insights from a retroactive date, you must call `newRelicInsightsReducer` consecutively.
-
 * **queryKey** - **STRING** - This is an API key that is generated within the New Relic UI that allows you to query your data. This is a required parameter. If you need help generating your query key see [New Relic's documentation here](https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api#register) . 
 
-* **insertKey** - **STRING** - This is an API key that is generated within the New Relic UI that allows you to insert your data. This is a required parameter. If you need help generating your insert key see [New Relic's documentation here](https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api#register) . 
-
-* **applicationIds** - **ARRAY** - This is not a required parameter. Should you want to filter your data reduction to certain applications, you can supply the specific application ids in this array. If you need help finding your application ids see [New Relic's documentation here](https://docs.newrelic.com/docs/apis/rest-api-v2/api-explorer-v2/retrieve-metric-timeslice-data-your-app-explorer#app_id) . 
+* **insertKey** - **STRING** - This is an API key that is generated within the New Relic UI that allows you to insert your data. This is a required parameter. If you need help generating your insert key see [New Relic's documentation here](https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api#register) .  
 
 * **events** - **ARRAY** - This is a required parameter. This parameter will decide which events you are reducing, what they will be named and which attributes you will be faceting, and sub-faceting, them off of. Let's review the event API below:  
     
@@ -87,32 +73,24 @@ newRelicInsightsReducer(config);
             //
             //The "facet" property is required. 
             //It's the name of the event property that you want to facet.
-            facet : "name",
+            name : "name",
             //
             //Want to sub-facet? You can! 
             //Below, if the event.facet.name == "Controller/Car_details/show"
             //then those events will be sub-faceted based on their "car_status" property.
-            subFacets : 
-            [
-              {
-              facetValue : "Controller/Car_details/show"
-              subFacetProperty : "car_status"
-              }
-            ],
+            subFacet: {
+              facetValue: "Controller/Car_details/show", //if name == 'Controller/Car_details/show'
+              facetProperty: "prop_status" //sub-facet on 'prop_status'
+            },
             //
             //You can't use a "subFacet" and a "customFilter" in the same facet object.
             //Look at the facet object below for a "customFilter" usage example.
-            customFilter : undefined 
           },
           {
             //
             //The "facet" property is required. 
             //It's the name of the event property that you want to facet.
             facet : "userAgent",
-            //
-            //You can't use a "subFacet" and a "customFilter" in the same facet object.
-            //Look at the facet object above for a "subFacet" usage example.
-            subFacet : undefined,
             //
             //The custom filter is a synchronus function. Avoid network calls here.
             //The function passed in here should accept a STRING and return a STRING.
@@ -129,6 +107,8 @@ newRelicInsightsReducer(config);
                 //which is passed in as the facet parameter
             },
             //
+            //You can't use a "subFacet" and a "customFilter" in the same facet object.
+            //Look at the facet object above for a "subFacet" usage example.
           }
         ]
         ```
@@ -147,7 +127,7 @@ newRelicInsightsReducer(config);
             //The options are as follows:
             values : 
             [
-              "min","max",5,10,50,90,95
+              "min","max",50,90,95
             ],
           }
         ]
