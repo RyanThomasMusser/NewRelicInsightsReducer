@@ -65,7 +65,7 @@ newRelicInsightsReducer(config);
     
     * **EVENT.oldEventName** - **STRING** - The name of the event that you want to target. For example, typical use cases here would be **Transaction**, **PageView**, **TransactionError** or any other out of the box or custom event that is being captured by New Relic Insights.
     * **EVENT.newEventName** - **STRING** - This is the name that will be given to the newly created, reduced event. Some examples may be **CustomTransactionEvent** or **ReducedTransactionEvent**. This really depends on your preference as it will be the name you use to query the new events within New Relic's Insights.
-    * **EVENT.facets** - **ARRAY** - This is a required parameter. This parameter will decide how to facet, sub-facet and run custom filters the events you are reducing. Let's review some examples of the EVENT.facets API below:
+    * **EVENT.facets** - **ARRAY** - This is a required parameter. This parameter will decide how to facet, sub-facet and run custom filters against the events you are reducing. Let's review some examples of the EVENT.facets API below:
         ```javascript
         var facetsArray = 
         [
@@ -80,7 +80,7 @@ newRelicInsightsReducer(config);
             //then those events will be sub-faceted based on their "car_status" property.
             subFacet: {
               facetValue: "Controller/Car_details/show", //if name == 'Controller/Car_details/show'
-              facetProperty: "prop_status" //sub-facet on 'prop_status'
+              facetProperty: "car_status" //sub-facet on "car_status"
             },
             //
             //You can't use a "subFacet" and a "customFilter" in the same facet object.
@@ -104,7 +104,7 @@ newRelicInsightsReducer(config);
                 //and return a random value because this is a fake function
                 return fakeFilterValue[ Math.floor(Math.random() * fakeFilterValues.length) ];
                 //the return value will replace the original value of "userAgent"
-                //which is passed in as the facet parameter
+                //which is passed in as the facet parameter. This groups these events.
             },
             //
             //You can't use a "subFacet" and a "customFilter" in the same facet object.
@@ -112,7 +112,7 @@ newRelicInsightsReducer(config);
           }
         ]
         ```
-    * **EVENT.durations** - **ARRAY** - This is not a required parameter. This parameter will decide how you new custom event will record durations. Let's review some examples of the EVENT.durations API below:
+    * **EVENT.durations** - **ARRAY** - This is not a required parameter. This parameter will decide how your new custom event will record durations. Let's review an examples of the EVENT.durations API below:
         ```javascript
         var durationsArray = 
         [
@@ -122,7 +122,7 @@ newRelicInsightsReducer(config);
             //It's the name of the event's duration property that you want to retrieve.
             name : "duration",
             //
-            //Want to percentiles of duration? You got it! 
+            //Want percentiles? You got it! 
             //This is a required parameter. Atleast one value must be supplied.
             //The options are as follows:
             values : 
