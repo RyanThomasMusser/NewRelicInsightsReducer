@@ -54,7 +54,7 @@ var config = {
 //Lastly, invoke the function
 newRelicInsightsReducer(config);
 
-####### Example output coming soon
+*Example output coming soon
 
 ```
 
