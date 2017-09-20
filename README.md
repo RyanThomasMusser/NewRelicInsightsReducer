@@ -24,31 +24,37 @@ var config = {
   events: [{
     oldEventName: "Transaction",
     newEventName: "reducedTransaction",
-    facets: [{
-      name: "name",
-      subFacet: {
-        facetValue: "Controller/Car_details/show",
-        facetProperty: "car_status"
+    facets: [
+      {
+        name: "name",
+        subFacet: {
+          facetValue: "Controller/Car_details/show",
+          facetProperty: "car_status"
+        }
       },
-      },{
+      {
         name: "userAgent",
         customFilter: function(facet) {
           var fakeFilterValues = ["Tablet", "Desktop", "Bot", "Mobile"];
           return fakeFilterValues[Math.floor(Math.random() * fakeFilterValues.length)];
-        },
+        }
       }
     ],
-    durations: [{
-      name: "duration",
-      values: [
-        "min", "max", 50, 90, 95
-      ]
-    }]
+    durations: [
+      {
+        name: "duration",
+        values: [
+          "min", "max", 50, 90, 95
+        ]
+      }
+    ]
   }]
 };
 
 //Lastly, invoke the function
 newRelicInsightsReducer(config);
+
+####### Example output coming soon
 
 ```
 
